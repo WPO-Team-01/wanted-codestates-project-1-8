@@ -38,47 +38,47 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
   };
 
   const makeMemo = () => {
-    let temp = localStorage.getItem("data");
+    let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
 
     let object = {
       id: temp.length,
-      이름: data.fcNm,
-      주소: data.fcAddr,
-      연락처: data.ref1,
-      메모: memo,
+      name: data.fcNm,
+      address: data.fcAddr,
+      phoneNum: data.ref1,
+      memo: memo,
     };
 
     temp.push(object);
     console.log(temp);
-    localStorage.setItem("data", JSON.stringify(temp));
+    localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
   const deleteMemo = () => {
-    let temp = localStorage.getItem("data");
+    let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
     temp.splice([temp.id], 1);
     console.log(temp);
-    localStorage.setItem("data", JSON.stringify(temp));
+    localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
   const changeMemo = () => {
-    let temp = localStorage.getItem("data");
+    let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
     let object = {
       id: temp.length,
-      이름: data.fcNm,
-      주소: data.fcAddr,
-      연락처: data.ref1,
-      메모: memo,
+      name: data.fcNm,
+      address: data.fcAddr,
+      phoneNum: data.ref1,
+      memo: memo,
     };
     temp[temp.id] = object;
     console.log(temp);
-    localStorage.setItem("data", JSON.stringify(temp));
+    localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
 
-  console.log(data);
+  console.log(myForestLists);
   return (
     <>
       <Wrapper onClick={handleModal} />
