@@ -7,7 +7,7 @@ function App() {
   const { data, isLoading } = useGetContentsQuery(pageNum);
 
   if (!isLoading) {
-    console.log(JSON.parse(data));
+    console.log(data);
   }
 
   return <div className="App">Hello!</div>;

@@ -10,6 +10,7 @@ export const ForestApi = createApi({
     getContents: builder.query({
       query: (page = 1) =>
         `/openapi-json/pubdata/pubMapForest.do?pageNo=${page}`,
+      transformResponse: (response) => JSON.parse(response),
     }),
   }),
 });
