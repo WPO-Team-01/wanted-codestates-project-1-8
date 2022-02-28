@@ -30,20 +30,23 @@ const ChangeButton = styled.div`
   cursor: pointer;
 `;
 
-const Button = ({ mode, handleModal, memo }) => {
+const Button = ({ mode, handleModal, memo, setButton }) => {
   const storeData = () => {
     if (memo !== "") {
       handleModal();
+      setButton("store");
     }
   };
   const deleteData = () => {
     if (memo !== "") {
       handleModal();
+      setButton("delete");
     }
   };
   const changeData = () => {
     if (memo !== "") {
       handleModal();
+      setButton("change");
     }
   };
 

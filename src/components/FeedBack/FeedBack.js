@@ -10,15 +10,22 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   position: absolute;
+  width: 200px;
+  height: 50px;
+  color: white;
+  background-color: #3fc176;
+  transition: 0.3s;
 `;
 
-const FeedBack = () => {
+const FeedBack = ({ button }) => {
   // 상위 요소에서 feebackOpen,setFeebackOpen props로 내려 받아야 합니다.
   const [feebackOpen, setFeebackOpen] = useState(false);
 
   const handleFeedBack = () => {
-    setTimeout(() => setFeebackOpen(false), 1000);
+    setFeebackOpen(false);
   };
+
+  const handleText = ({button} => {})
 
   return (
     <>
