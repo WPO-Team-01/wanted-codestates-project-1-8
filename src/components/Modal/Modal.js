@@ -29,18 +29,17 @@ const Container = styled.section`
 `;
 
 const Modal = ({ data }) => {
-  // 상위 요소에서 open, handleModal을 props로 내려 받아야 합니다.
-  const [open, setOpen] = useState(true);
-
+  // 상위 요소에서 open, setOpen을 props로 내려 받아야 합니다.
+  const [modalOpen, setModalOpen] = useState(true);
   const [memo, setMemo] = useState("");
 
   const handleModal = () => {
-    setOpen(false);
+    setModalOpen(false);
   };
 
   return (
     <>
-      {open ? (
+      {modalOpen ? (
         <>
           <Wrapper onClick={handleModal} />
           <Container>
@@ -48,7 +47,7 @@ const Modal = ({ data }) => {
             <Text title="주소" data="{data}" />
             <Text title="연락처" data="{data}" />
             <Memo title="메모" memo={memo} setMemo={setMemo} />
-            <Button mode="change" handleModal={handleModal} />
+            <Button mode="change" handleModal={handleModal} memo={memo} />
             {/* Button 태그의 mode props로 분기를 줬습니다.
                 "store" -> 저장폼 
                 "change" -> 수정폼 */}

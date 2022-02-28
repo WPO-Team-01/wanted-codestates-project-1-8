@@ -30,32 +30,40 @@ const ChangeButton = styled.div`
   cursor: pointer;
 `;
 
-const Button = ({ mode, handleModal }) => {
+const Button = ({ mode, handleModal, memo }) => {
   const storeData = () => {
-    handleModal();
+    if (memo !== "") {
+      handleModal();
+    }
   };
   const deleteData = () => {
-    handleModal();
+    if (memo !== "") {
+      handleModal();
+    }
   };
   const changeData = () => {
-    handleModal();
+    if (memo !== "") {
+      handleModal();
+    }
   };
 
   return (
-    <Container>
-      {mode === "store" ? (
-        <StoreButton onClick={storeData}>저장</StoreButton>
-      ) : mode === "change" ? (
-        <>
-          <ChangeButton color="#e74c3b" onClick={deleteData}>
-            삭제
-          </ChangeButton>
-          <ChangeButton color="#3fc176" onClick={changeData}>
-            수정
-          </ChangeButton>
-        </>
-      ) : null}
-    </Container>
+    <>
+      <Container>
+        {mode === "store" ? (
+          <StoreButton onClick={storeData}>저장</StoreButton>
+        ) : mode === "change" ? (
+          <>
+            <ChangeButton color="#e74c3b" onClick={deleteData}>
+              삭제
+            </ChangeButton>
+            <ChangeButton color="#3fc176" onClick={changeData}>
+              수정
+            </ChangeButton>
+          </>
+        ) : null}
+      </Container>
+    </>
   );
 };
 
