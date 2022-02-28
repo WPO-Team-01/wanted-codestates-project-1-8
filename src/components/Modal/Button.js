@@ -15,7 +15,7 @@ const StoreButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #3fc176;
+  background-color: ${({ memo }) => (memo === "" ? "#339c61" : "#3fc176")};
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -25,17 +25,28 @@ const ChangeButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ color }) => color};
+  background-color: ${({ memo, color }) =>
+    memo === "" ? (color === "#e74c3b" ? "#ae392f" : "#339c61") : color};
   border-radius: 5px;
   cursor: pointer;
 `;
 
-const Button = ({ mode, handleModal, memo, setFeedback, setFeedbackOpen }) => {
+const Button = ({
+  mode,
+  handleModal,
+  memo,
+  setFeedback,
+  setFeedbackOpen,
+  makeMemo,
+  deleteMemo,
+  changeMemo,
+}) => {
   const storeData = () => {
     if (memo !== "") {
       handleModal();
       setFeedback("store");
       setFeedbackOpen(true);
+      makeMemo();
     } else {
       setFeedback("empty");
       setFeedbackOpen(true);
@@ -46,6 +57,7 @@ const Button = ({ mode, handleModal, memo, setFeedback, setFeedbackOpen }) => {
       handleModal();
       setFeedback("delete");
       setFeedbackOpen(true);
+      deleteMemo();
     } else {
       setFeedback("empty");
       setFeedbackOpen(true);
@@ -59,6 +71,7 @@ const Button = ({ mode, handleModal, memo, setFeedback, setFeedbackOpen }) => {
     } else {
       setFeedback("empty");
       setFeedbackOpen(true);
+      changeMemo();
     }
   };
 
@@ -66,13 +79,15 @@ const Button = ({ mode, handleModal, memo, setFeedback, setFeedbackOpen }) => {
     <>
       <Container>
         {mode === "store" ? (
-          <StoreButton onClick={storeData}>저장</StoreButton>
+          <StoreButton memo={memo} onClick={storeData}>
+            저장
+          </StoreButton>
         ) : mode === "change" ? (
           <>
-            <ChangeButton color="#e74c3b" onClick={deleteData}>
+            <ChangeButton color="#e74c3b" memo={memo} onClick={deleteData}>
               삭제
             </ChangeButton>
-            <ChangeButton color="#3fc176" onClick={changeData}>
+            <ChangeButton color="#3fc176" memo={memo} onClick={changeData}>
               수정
             </ChangeButton>
           </>
