@@ -1,10 +1,18 @@
-import './App.css';
+import styled from "styled-components";
+import "./App.css";
+import ForestList from "./pages/ForestList/ForestList";
+
+const Layout = styled.div`
+  margin: 0 auto;
+  max-width: 400px;
+  border: 1px solid black;
+`;
 
 function App() {
   return (
-    <div className="App">
-      Hello!
-    </div>
+    <Layout>
+      <ForestList />
+    </Layout>
   );
 }
 
