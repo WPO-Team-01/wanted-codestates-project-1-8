@@ -21,7 +21,7 @@ const Container = styled.div`
     feedbackOpen
       ? `translate(${window.innerWidth - 300}px, ${window.innerHeight / 2}px)`
       : `translate(${window.innerWidth}px, ${window.innerHeight / 2}px)`};
-  transition: 1s;
+  transition: 2s;
 `;
 
 const Feedback = ({ feedback, feedbackOpen, setFeedbackOpen }) => {
