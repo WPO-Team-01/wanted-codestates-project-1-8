@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { useGetContentsQuery } from "./store/query/ForestApi";
+import ForestListPage from "./pages/ForestListPage/ForestListPage";
 
 function App() {
   const [pageNum, setPageNum] = useState(1);
@@ -10,7 +11,11 @@ function App() {
     console.log(data);
   }
 
-  return <div className="App">Hello!</div>;
+  return (
+    <div className="App">
+      <ForestListPage></ForestListPage>
+    </div>
+  );
 }
 
 export default App;
