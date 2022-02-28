@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { useGetContentsQuery } from "./store/query/ForestApi";
-import ForestList from "./pages/ForestList/ForestList";
+import SavedForestLists from "./pages/SavedForestLists/SavedForestLists";
 import styled from "styled-components";
 
 const Layout = styled.div`
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <Layout>
-      <ForestList />
+      {data?.response ? <SavedForestLists list={data.response} /> : <div></div>}
     </Layout>
   );
 }
