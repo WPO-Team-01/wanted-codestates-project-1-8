@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const SearchOptions = [
@@ -45,10 +45,20 @@ const MainPage = () => {
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
 
+  useEffect(() => {
+    const getDataList = localStorage.getItem('myData');
+
+
+  }, []);
+
 
   const handleSearchClick = () => {
       console.log(searchInputRef.current.value.trim(), currentSelectRef.current.value);
 
+  };
+
+  const handleShowDataListClick = () => {
+    // 전체 조회 Link
   };
 
   return (
@@ -66,7 +76,7 @@ const MainPage = () => {
       </SearchForm>
       <div>휴양지 목록</div>
       <footer>
-        <ShowDataListButton>➕</ShowDataListButton>
+        <ShowDataListButton onClick={handleShowDataListClick}>➕</ShowDataListButton>
       </footer>
     </div>
   );
