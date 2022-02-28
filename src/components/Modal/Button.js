@@ -30,23 +30,35 @@ const ChangeButton = styled.div`
   cursor: pointer;
 `;
 
-const Button = ({ mode, handleModal, memo, setButton }) => {
+const Button = ({ mode, handleModal, memo, setFeedback, setFeedbackOpen }) => {
   const storeData = () => {
     if (memo !== "") {
       handleModal();
-      setButton("store");
+      setFeedback("store");
+      setFeedbackOpen(true);
+    } else {
+      setFeedback("empty");
+      setFeedbackOpen(true);
     }
   };
   const deleteData = () => {
     if (memo !== "") {
       handleModal();
-      setButton("delete");
+      setFeedback("delete");
+      setFeedbackOpen(true);
+    } else {
+      setFeedback("empty");
+      setFeedbackOpen(true);
     }
   };
   const changeData = () => {
     if (memo !== "") {
       handleModal();
-      setButton("change");
+      setFeedback("change");
+      setFeedbackOpen(true);
+    } else {
+      setFeedback("empty");
+      setFeedbackOpen(true);
     }
   };
 
