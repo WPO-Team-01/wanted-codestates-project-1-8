@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import _ from "underscore";
 
 export const ForestApi = createApi({
   reducerPath: "ForestApi",
@@ -8,9 +9,10 @@ export const ForestApi = createApi({
   }),
   endpoints: (builder) => ({
     getContents: builder.query({
-      query: (page = 1) =>
-        `/openapi-json/pubdata/pubMapForest.do?pageNo=${page}`,
-      transformResponse: (response) => JSON.parse(response),
+      query: (page) =>
+        `/openapi-json/pubdata/pubMapForest.do?numOfRows=${page}`,
+      transformResponse: (response) =>
+        _.uniq(JSON.parse(response).response, "fcNo"),
     }),
   }),
 });
