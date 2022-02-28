@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { useGetContentsQuery } from "./store/query/ForestApi";
 import ForestListPage from "./pages/ForestListPage/ForestListPage";
+import MainPage from "./pages/MainPage/MainPage";
 
 function App() {
   const [pageNum, setPageNum] = useState(1);
