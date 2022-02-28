@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { useGetContentsQuery } from "./store/query/ForestApi";
 import Modal from "./components/Modal/Modal";
-import Feedback from "./components/Feedback/Feedback";
+import Feedback from "./components/FeedBack/FeedBack";
 
 function App() {
   const [pageNum, setPageNum] = useState(1);
