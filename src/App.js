@@ -1,14 +1,22 @@
-import styled from "styled-components";
+import { useState } from "react";
 import "./App.css";
+import { useGetContentsQuery } from "./store/query/ForestApi";
 import ForestList from "./pages/ForestList/ForestList";
+import styled from "styled-components";
 
 const Layout = styled.div`
-  margin: 0 auto;
   max-width: 400px;
-  border: 1px solid black;
+  margin: 0 auto;
 `;
 
 function App() {
+  const [pageNum, setPageNum] = useState(1);
+  const { data, isLoading } = useGetContentsQuery(pageNum);
+
+  if (!isLoading) {
+    console.log(data);
+  }
+
   return (
     <Layout>
       <ForestList />
