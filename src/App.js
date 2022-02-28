@@ -14,7 +14,12 @@ function App() {
 
   return (
     <div className="App">
-      <ForestListPage></ForestListPage>
+      <div>
+        <MainPage></MainPage>
+      </div>
+      <div>
+        <ForestListPage></ForestListPage>
+      </div>
     </div>
   );
 }
