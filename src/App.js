@@ -1,26 +1,20 @@
-import { useState } from "react";
 import "./App.css";
-import { useGetContentsQuery } from "./store/query/ForestApi";
-import ForestListPage from "./pages/ForestListPage/ForestListPage";
-import MainPage from "./pages/MainPage/MainPage";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import { MainPage, ForestListPage } from "./pages";
 
 function App() {
-  const [pageNum, setPageNum] = useState(1);
-  const { data, isLoading } = useGetContentsQuery(pageNum);
-
-  if (!isLoading) {
-    console.log(data);
-  }
-
   return (
-    <div className="App">
-      <div>
-        <MainPage></MainPage>
+    <HashRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<MainPage></MainPage>}></Route>
+          <Route
+            path="/forestList"
+            element={<ForestListPage></ForestListPage>}
+          ></Route>
+        </Routes>
       </div>
-      <div>
-        <ForestListPage></ForestListPage>
-      </div>
-    </div>
+    </HashRouter>
   );
 }
 
