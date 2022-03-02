@@ -57,6 +57,7 @@ const ForestListPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowFeedback, setIsShowFeedback] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [feedback, setFeedback] = useState("empty");
   const queryResult = useGetContentsQuery(scrollPage);
 
   useEffect(() => {
@@ -103,14 +104,14 @@ const ForestListPage = () => {
             data={selectedData}
             mode="store"
             setModalOpen={setIsShowModal}
-            setFeedback={(e) => console.log(e)}
+            setFeedback={setFeedback}
             setFeedbackOpen={() => setIsShowFeedback(true)}
           ></Modal>
         )}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
         {isLoading && !isEnded && <Loader></Loader>}
         <Feedback
-          feedback="store"
+          feedback={feedback}
           feedbackOpen={isShowFeedback}
           setFeedbackOpen={setIsShowFeedback}
         ></Feedback>
