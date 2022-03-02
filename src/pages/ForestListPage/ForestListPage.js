@@ -120,10 +120,8 @@ const ForestListPage = () => {
             setFeedbackOpen={() => setIsShowFeedback(true)}
           ></Modal>
         )}
-        {!queryResult.isFetching ? (
-          !isEnded && <div ref={setObservationTarget}>더보기</div>
-        ) : (
-          <div ref={setObservationTarget}>로딩중</div>
+        {!queryResult.isFetching && !isEnded && (
+          <div ref={setObservationTarget}>더보기</div>
         )}
         {queryResult.isFetching && !isEnded && <Loader></Loader>}
         <Feedback
