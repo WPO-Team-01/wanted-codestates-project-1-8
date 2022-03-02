@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Modal from "../../components/Modal/Modal";
 import SavedForestLists from "../SavedForestLists/SavedForestLists";
+import FeedBack from "../../components/FeedBack/FeedBack";
+
 const SearchOptions = [
   {
     key: 1,
@@ -29,6 +32,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   overflow-y: scroll;
 `;
+
 const SearchForm = styled.div`
   display: flex;
   flex-direction: row;
@@ -38,10 +42,15 @@ const ShowDataListButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
-  border-radius: 100%;
+
+  position: sticky;
+  float: right;
+
+  bottom: 0;
   width: 35px;
   height: 35px;
+  border-radius: 100%;
+  background-color: gray;
 
   cursor: pointer;
 `;
@@ -49,6 +58,7 @@ const ShowDataListButton = styled.div`
 const SearchButton = styled.div`
   cursor: pointer;
   border: solid 1px black;
+  padding-left: 2px;
 `;
 
 const MainPage = () => {
@@ -57,6 +67,14 @@ const MainPage = () => {
   );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
+  //
+  const [modalOpen, setModalOpen] = useState(false);
+  const [feedback, setFeedback] = useState("store");
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  //
+  const [selectedData, setSelectedData] = useState(null);
+
+  console.log(selectedData);
 
   useEffect(() => {
     if (!myForestLists) {
@@ -80,6 +98,8 @@ const MainPage = () => {
     setMyForestLists(searchMyForestLists);
   };
 
+  console.log(selectedData);
+  console.log(modalOpen);
   return (
     <Wrapper>
       <SearchForm>
@@ -90,21 +110,50 @@ const MainPage = () => {
             </option>
           ))}
         </select>
-        <input ref={searchInputRef} placeholder="검색어를 입력해주세요." />
+        <input
+          ref={searchInputRef}
+          placeholder="검색어를 입력해주세요."
+          style={{ width: "100%" }}
+        />
         <SearchButton onClick={handleSearchClick}>🔍</SearchButton>
       </SearchForm>
       {myForestLists ? (
-        <SavedForestLists myForestLists={myForestLists} />
+        <SavedForestLists
+          setModalOpen={setModalOpen}
+          setSelectedData={setSelectedData}
+          myForestLists={myForestLists}
+        />
       ) : (
         <div></div>
       )}
-      <footer>
-        <Link to="/forestList">
-          <ShowDataListButton>
-            ➕
-          </ShowDataListButton>
-        </Link>
-      </footer>
+
+      <Link to="/forestList" style={{ textDecoration: "none" }}>
+        <ShowDataListButton>
+          <div style={{ marginTop: "-1px", marginLeft: "0.5px" }}>➕</div>
+        </ShowDataListButton>
+      </Link>
+      {selectedData && (
+        <Modal
+          data={{
+            id: selectedData.id,
+            fcNm: selectedData.name,
+            fcAddr: selectedData.address,
+            ref1: selectedData.phoneNum,
+            memo: selectedData.memo,
+          }}
+          mode="change"
+          setModalOpen={setModalOpen}
+          setFeedback={setFeedback}
+          setFeedbackOpen={setFeedbackOpen}
+        />
+      ) : null}
+      {feedbackOpen ? (
+        <FeedBack
+          feedback={feedback}
+          feedbackOpen={feedbackOpen}
+          setFeedbackOpen={setFeedbackOpen}
+        />
+      ) : null}
     </Wrapper>
   );
 };

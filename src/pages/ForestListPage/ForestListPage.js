@@ -57,26 +57,27 @@ const numOfRows = 10;
 
 const ForestListPage = () => {
   const navigate = useNavigate();
-  const [scrollPage, setScrollPage] = useState(0);
+  const [scrollPage, setScrollPage] = useState(1);
   const [scrollList, setScrollList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEnded, setIsEnded] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowFeedback, setIsShowFeedback] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [feedback, setFeedback] = useState("empty");
   const queryResult = useGetContentsQuery(scrollPage);
 
+  const isEnded = queryResult.data?.response.length < numOfRows;
+
   useEffect(() => {
-    if (!queryResult.isLoading && isLoading) {
+    if (!queryResult.isFetching) {
       setScrollList(scrollList.concat(queryResult.data.response));
-      if (queryResult.data.response.length < numOfRows) setIsEnded(true);
-      setIsLoading(false);
     }
   }, [queryResult]);
 
   const getMoreItem = async () => {
-    setIsLoading(true);
-    setScrollPage(scrollPage + 1);
+    if (!queryResult.isFetching && !isEnded) {
+      console.warn(1111, queryResult.isFetching);
+      setScrollPage((prev) => prev + 1);
+    }
   };
 
   const setObservationTarget = useInfiniteScroll(getMoreItem);
@@ -105,14 +106,18 @@ const ForestListPage = () => {
             data={selectedData}
             mode="store"
             setModalOpen={setIsShowModal}
-            setFeedback={(e) => console.log(e)}
+            setFeedback={setFeedback}
             setFeedbackOpen={() => setIsShowFeedback(true)}
           ></Modal>
         )}
-        {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
-        {isLoading && !isEnded && <Loader></Loader>}
+        {!queryResult.isFetching ? (
+          !isEnded && <div ref={setObservationTarget}>더보기</div>
+        ) : (
+          <div ref={setObservationTarget}>로딩중</div>
+        )}
+        {queryResult.isFetching && !isEnded && <Loader></Loader>}
         <Feedback
-          feedback="store"
+          feedback={feedback}
           feedbackOpen={isShowFeedback}
           setFeedbackOpen={setIsShowFeedback}
         ></Feedback>

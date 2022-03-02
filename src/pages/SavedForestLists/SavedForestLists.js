@@ -1,12 +1,16 @@
+import React from "react";
 import SavedForestCard from "./SavedForestCard";
 
-const ForestLists = ({ myForestLists }) => {
-  console.log(myForestLists);
-
+const ForestLists = ({ setModalOpen, myForestLists, setSelectedData }) => {
   return (
     <>
       {myForestLists.map((card, index) => (
-        <SavedForestCard card={card} key={index} />
+        <SavedForestCard
+          setModalOpen={setModalOpen}
+          setSelectedData={setSelectedData}
+          card={card}
+          key={index}
+        />
       ))}
     </>
   );
