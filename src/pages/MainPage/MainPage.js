@@ -56,7 +56,7 @@ const SearchButton = styled.div`
 
 const MainPage = () => {
   const [myForestLists, setMyForestLists] = useState(
-    JSON.parse(localStorage.getItem("myForestLists"))
+    JSON.parse(localStorage.getItem("myForestLists")),
   );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
