@@ -6,6 +6,7 @@ import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import SavedForestCard from "../SavedForestLists/SavedForestCard";
+import Loader from "../../components/Loader/Loader";
 
 const TitleBox = styled.div`
   font-size: 1.5rem;
@@ -107,7 +108,7 @@ const ForestListPage = () => {
           ></Modal>
         )}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
-        {isLoading && !isEnded && <div>로딩중</div>}
+        {isLoading && !isEnded && <Loader></Loader>}
         <Feedback
           feedback="store"
           feedbackOpen={isShowFeedback}
