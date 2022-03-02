@@ -5,6 +5,7 @@ import Feedback from "../../components/FeedBack/FeedBack";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import SavedForestCard from "../SavedForestLists/SavedForestCard";
 
 const TitleBox = styled.div`
   font-size: 1.5rem;
@@ -80,39 +81,39 @@ const ForestListPage = () => {
   return (
     <>
       <TitleBox>휴양림 목록</TitleBox>
-      {isShowModal && (
-        <Modal
-          data={selectedData}
-          mode="store"
-          setModalOpen={setIsShowModal}
-          setFeedback={(e) => console.log(e)}
-          setFeedbackOpen={() => setIsShowFeedback(true)}
-        ></Modal>
-      )}
       <ListWrap>
         {scrollList.map((forest, index) => (
-          <li
-            key={`${forest.fcNm}-${index}`}
-            style={{ height: "200px", border: "1px solid black" }}
-          >
+          <li key={`${forest.fcNm}-${index}`}>
             <ListBtn onClick={() => onClickList(forest)}>
-              <span>{index + 1}</span>
-              <span>{forest.fcNm}</span>
-              <span>{forest.fcAddr}</span>
-              <span>{forest.ref1}</span>
+              <SavedForestCard
+                card={{
+                  fcNm: forest.fcNm,
+                  name: forest.fcNm,
+                  address: forest.fcAddr,
+                  phoneNum: forest.ref1,
+                }}
+              ></SavedForestCard>
             </ListBtn>
           </li>
         ))}
+        <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
+        {isShowModal && (
+          <Modal
+            data={selectedData}
+            mode="store"
+            setModalOpen={setIsShowModal}
+            setFeedback={(e) => console.log(e)}
+            setFeedbackOpen={() => setIsShowFeedback(true)}
+          ></Modal>
+        )}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
         {isLoading && !isEnded && <div>로딩중</div>}
-
         <Feedback
           feedback="store"
           feedbackOpen={isShowFeedback}
           setFeedbackOpen={setIsShowFeedback}
         ></Feedback>
       </ListWrap>
-      <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
     </>
   );
 };
