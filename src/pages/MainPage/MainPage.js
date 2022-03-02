@@ -42,14 +42,14 @@ const SearchButton = styled.div`
 `;
 
 const MainPage = () => {
-  const [myForestLists, setMyForestLists] = useState(localStorage.getItem("myForestLists"));
+  const [myForestLists, setMyForestLists] = useState(JSON.parse(localStorage.getItem("myForestLists")));
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
 
   useEffect(() => {
     if (!myForestLists) {
       localStorage.setItem("myForestLists", JSON.stringify([]));
-      setMyForestLists(localStorage.getItem("myForestLists"));
+      setMyForestLists(JSON.parse(localStorage.getItem("myForestLists")));
     }
   }, []);
 
