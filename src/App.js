@@ -2,14 +2,6 @@ import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { MainPage, ForestListPage } from "./pages";
 
-import { useGetContentsQuery } from "./store/query/ForestApi";
-import styled from "styled-components";
-
-const Layout = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
-`;
-
 function App() {
   return (
     <HashRouter>
