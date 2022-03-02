@@ -10,19 +10,27 @@ import Loader from "../../components/Loader/Loader";
 const TitleBox = styled.div`
   font-size: 1.5rem;
   padding: 0.5rem;
+  margin: 1rem;
 `;
 
 const ListWrap = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.button`
   background-color: #f2f2f2;
-  margin: 15px 0;
-  padding: 10px;
+  margin: 0 1rem;
+  padding: 1rem;
   border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5) inset;
+  }
 `;
 
 const CardTitle = styled.div`
@@ -39,8 +47,8 @@ const Btn = styled.button`
   padding: 0;
   border: none;
   position: fixed;
-  left: 0.5rem;
-  top: 0.5rem;
+  left: 1rem;
+  top: 1rem;
   background-color: #ddd;
   border-radius: 5px;
   width: 35px;
@@ -92,13 +100,14 @@ const ForestListPage = () => {
       <TitleBox>휴양림 목록</TitleBox>
       <ListWrap>
         {scrollList.map((forest, index) => (
-          <li key={`${forest.fcNm}-${index}`}>
-            <CardContainer onClick={() => onClickList(forest)}>
-              <CardTitle>⛰ {forest.fcNm}</CardTitle>
-              <CardInfo>📪 {forest.fcAddr}</CardInfo>
-              <CardInfo>📞 {forest.ref1}</CardInfo>
-            </CardContainer>
-          </li>
+          <CardContainer
+            key={`${forest.fcNm}-${index}`}
+            onClick={() => onClickList(forest)}
+          >
+            <CardTitle>⛰ {forest.fcNm}</CardTitle>
+            <CardInfo>📪 {forest.fcAddr}</CardInfo>
+            <CardInfo>📞 {forest.ref1}</CardInfo>
+          </CardContainer>
         ))}
         <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
         {isShowModal && (
