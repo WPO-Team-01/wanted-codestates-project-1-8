@@ -28,11 +28,18 @@ const Container = styled.section`
   z-index: 1;
 `;
 
-const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
+const Modal = ({
+  data,
+  mode,
+  selectedData,
+  setModalOpen,
+  setFeedback,
+  setFeedbackOpen,
+}) => {
   // 상위 요소에서 modalOpen, setModalOpen, setFeedBack을 props로 내려 받아야 합니다.
 
-  const [memo, setMemo] = useState("");
-
+  const [memo, setMemo] = useState(data.memo !== "" ? data.memo : "");
+  console.log(selectedData);
   const handleModal = () => {
     setModalOpen(false);
   };
@@ -43,11 +50,11 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
     console.log(temp);
 
     let object = {
-      id: temp.length,
+      id: Math.random(),
       name: data.fcNm,
       address: data.fcAddr,
       phoneNum: data.ref1,
-      memo: memo,
+      memo: String(memo),
     };
 
     temp.push(object);
@@ -58,22 +65,38 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
     let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
-    temp.splice([temp.id], 1);
+
+    let deleteIndex;
+    for (let i = 0; i < temp.length; i++) {
+      if (selectedData.id === temp[i].id) {
+        deleteIndex = i;
+      }
+    }
+    console.log(deleteIndex);
+    temp.splice(deleteIndex, 1);
     console.log(temp);
     localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
+  console.log(memo);
   const changeMemo = () => {
     let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
     let object = {
-      id: temp.length,
+      id: data.id,
       name: data.fcNm,
       address: data.fcAddr,
       phoneNum: data.ref1,
       memo: memo,
     };
-    temp[temp.id] = object;
+    let changeIndex;
+    for (let i = 0; i < temp.length; i++) {
+      if (selectedData.id === temp[i].id) {
+        changeIndex = i;
+      }
+    }
+    console.log(changeIndex);
+    temp[changeIndex] = object;
     console.log(temp);
     localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
@@ -85,11 +108,7 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
           <Text title="이름" data={data.fcNm} />
           <Text title="주소" data={data.fcAddr} />
           <Text title="연락처" data={data.ref1} />
-          <Memo
-            title="메모"
-            memo={data.memo !== null ? data.memo : memo}
-            setMemo={setMemo}
-          />
+          <Memo title="메모" memo={memo} setMemo={setMemo} />
           <Button
             mode={mode}
             handleModal={handleModal}

@@ -26,7 +26,6 @@ const Memo = ({ title, memo, setMemo }) => {
   const onChangeInput = (e) => {
     setMemo(e.target.value);
   };
-
   return (
     <Container>
       <Title>{title}</Title>

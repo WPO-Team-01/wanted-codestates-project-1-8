@@ -74,8 +74,6 @@ const MainPage = () => {
   //
   const [selectedData, setSelectedData] = useState(null);
 
-  console.log(selectedData);
-
   useEffect(() => {
     if (!myForestLists) {
       localStorage.setItem("myForestLists", JSON.stringify([]));
@@ -98,8 +96,6 @@ const MainPage = () => {
     setMyForestLists(searchMyForestLists);
   };
 
-  console.log(selectedData);
-  console.log(modalOpen);
   return (
     <Wrapper>
       <SearchForm>
@@ -132,7 +128,7 @@ const MainPage = () => {
           <div style={{ marginTop: "-1px", marginLeft: "0.5px" }}>➕</div>
         </ShowDataListButton>
       </Link>
-      {selectedData && (
+      {selectedData && modalOpen ? (
         <Modal
           data={{
             id: selectedData.id,
@@ -142,6 +138,7 @@ const MainPage = () => {
             memo: selectedData.memo,
           }}
           mode="change"
+          selectedData={selectedData}
           setModalOpen={setModalOpen}
           setFeedback={setFeedback}
           setFeedbackOpen={setFeedbackOpen}
