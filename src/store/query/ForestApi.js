@@ -8,8 +8,7 @@ export const ForestApi = createApi({
   }),
   endpoints: (builder) => ({
     getContents: builder.query({
-      query: (page = 1) =>
-        `/openapi-json/pubdata/pubMapForest.do?pageNo=${page}`,
+      query: (page) => `/openapi-json/pubdata/pubMapForest.do?pageNo=${page}`,
       transformResponse: (response) => JSON.parse(response),
     }),
   }),
