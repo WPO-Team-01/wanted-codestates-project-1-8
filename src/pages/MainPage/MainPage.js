@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import SavedForestLists from "../SavedForestLists/SavedForestLists";
 const SearchOptions = [
   {
     key: 1,
@@ -20,6 +20,15 @@ const SearchOptions = [
   },
 ];
 
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  width: 375px;
+  height: 667px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid black;
+  overflow-y: scroll;
+`;
 const SearchForm = styled.div`
   display: flex;
   flex-direction: row;
@@ -71,9 +80,8 @@ const MainPage = () => {
     setMyForestLists(searchMyForestLists);
   };
 
-
   return (
-    <div>
+    <Wrapper>
       <SearchForm>
         <select ref={currentSelectRef}>
           {SearchOptions.map((elem) => (
@@ -85,17 +93,19 @@ const MainPage = () => {
         <input ref={searchInputRef} placeholder="검색어를 입력해주세요." />
         <SearchButton onClick={handleSearchClick}>🔍</SearchButton>
       </SearchForm>
-      <div>휴양지 목록</div>
+      {myForestLists ? (
+        <SavedForestLists myForestLists={myForestLists} />
+      ) : (
+        <div></div>
+      )}
       <footer>
         <Link to="/forestList">
           <ShowDataListButton onClick={handleShowDataListClick}>
             ➕
           </ShowDataListButton>
         </Link>
-
-        <ShowDataListButton onClick={makeList}>MAKE LIST</ShowDataListButton>
       </footer>
-    </div>
+    </Wrapper>
   );
 };
 

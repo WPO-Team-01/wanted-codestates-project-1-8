@@ -5,7 +5,7 @@ import Memo from "./Memo";
 import Button from "./Button";
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const Container = styled.section`
   width: 400px;
   height: 500px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -78,29 +78,29 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
     localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
 
-  console.log(myForestLists);
   return (
     <>
-      <Wrapper onClick={handleModal} />
-      <Container>
-        <Text title="이름" data={data.fcNm} />
-        <Text title="주소" data={data.fcAddr} />
-        <Text title="연락처" data={data.ref1} />
-        <Memo title="메모" memo={memo} setMemo={setMemo} />
-        <Button
-          mode={mode}
-          handleModal={handleModal}
-          memo={memo}
-          setFeedback={setFeedback}
-          setFeedbackOpen={setFeedbackOpen}
-          makeMemo={makeMemo}
-          deleteMemo={deleteMemo}
-          changeMemo={changeMemo}
-        />
-        {/* Button 태그의 mode props로 분기를 줬습니다.
+      <Wrapper onClick={handleModal}>
+        <Container onClick={(e) => e.stopPropagation()}>
+          <Text title="이름" data={data.fcNm} />
+          <Text title="주소" data={data.fcAddr} />
+          <Text title="연락처" data={data.ref1} />
+          <Memo title="메모" memo={memo} setMemo={setMemo} />
+          <Button
+            mode={mode}
+            handleModal={handleModal}
+            memo={memo}
+            setFeedback={setFeedback}
+            setFeedbackOpen={setFeedbackOpen}
+            makeMemo={makeMemo}
+            deleteMemo={deleteMemo}
+            changeMemo={changeMemo}
+          />
+          {/* Button 태그의 mode props로 분기를 줬습니다.
                 "store" -> 저장폼 
                 "change" -> 수정폼 */}
-      </Container>
+        </Container>
+      </Wrapper>
     </>
   );
 };
