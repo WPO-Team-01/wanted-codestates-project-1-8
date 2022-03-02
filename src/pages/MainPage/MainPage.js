@@ -71,22 +71,6 @@ const MainPage = () => {
     setMyForestLists(searchMyForestLists);
   };
 
-  // const makeList = () => {
-  //   let temp = localStorage.getItem("myForestLists");
-  //   temp = JSON.parse(temp);
-
-  //   let object = {
-  //     id: "1",
-  //     name: "테스트 이름^^",
-  //     address: "테스트 주소%%",
-  //     phoneNum: "000-000-0000$$",
-  //     memo: "테스트 메모@@",
-  //   };
-
-  //   temp.push(object);
-  //   localStorage.setItem("myForestLists", JSON.stringify(temp));
-  //   setMyForestLists(temp);
-  // };
 
   return (
     <div>
@@ -103,7 +87,7 @@ const MainPage = () => {
       </SearchForm>
       <div>휴양지 목록</div>
       <footer>
-        <Link to="/">
+        <Link to="/forestList">
           <ShowDataListButton onClick={handleShowDataListClick}>
             ➕
           </ShowDataListButton>
