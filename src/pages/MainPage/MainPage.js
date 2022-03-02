@@ -46,6 +46,7 @@ const ShowDataListButton = styled.div`
   position: sticky;
   float: right;
 
+  top: 50px;
   bottom: 0;
   width: 35px;
   height: 35px;
