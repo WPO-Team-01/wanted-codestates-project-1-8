@@ -68,10 +68,10 @@ const Button = ({
       handleModal();
       setFeedback("change");
       setFeedbackOpen(true);
+      changeMemo();
     } else {
       setFeedback("empty");
       setFeedbackOpen(true);
-      changeMemo();
     }
   };
 
