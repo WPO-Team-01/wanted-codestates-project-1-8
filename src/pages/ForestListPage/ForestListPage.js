@@ -2,10 +2,21 @@ import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
+import styled from "styled-components";
+
+const TitleBox = styled.div`
+  font-size: 1.5rem;
+  padding: 0.5rem;
+`;
+
+const ListWrap = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
 const numOfRows = 10;
 
-// fcNm 이름, fcAddr 주소, ref1 연락처
 const ForestListPage = () => {
   const [scrollPage, setScrollPage] = useState(0);
   const [scrollList, setScrollList] = useState([]);
@@ -37,7 +48,7 @@ const ForestListPage = () => {
 
   return (
     <>
-      <div>휴양림 목록</div>
+      <TitleBox>휴양림 목록</TitleBox>
       {isShowModal && (
         <Modal
           data={selectedData}
@@ -47,7 +58,7 @@ const ForestListPage = () => {
           setFeedbackOpen={(e) => console.log(e)}
         ></Modal>
       )}
-      <ul>
+      <ListWrap>
         {scrollList.map((forest, index) => (
           <li
             key={`${forest.fcNm}-${index}`}
@@ -63,7 +74,7 @@ const ForestListPage = () => {
         ))}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
         {isLoading && !isEnded && <div>로딩중</div>}
-      </ul>
+      </ListWrap>
     </>
   );
 };
