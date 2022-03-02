@@ -5,6 +5,7 @@ const CardContainer = styled.div`
   margin: 15px 0;
   padding: 10px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const CardTitle = styled.div`
@@ -16,10 +17,9 @@ const CardInfo = styled.p`
   margin: 5px 0;
 `;
 
-const SavedForestCard = ({ card }) => {
-  console.log(card, card.fcNm);
+const SavedForestCard = ({ card, setSelectedData }) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={() => setSelectedData(card)}>
       <CardTitle>⛰ {card.name}</CardTitle>
       <CardInfo>📪 {card.address}</CardInfo>
       <CardInfo>📞 {card.phoneNum}</CardInfo>

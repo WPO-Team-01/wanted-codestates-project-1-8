@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Modal from "../../components/Modal/Modal";
 import SavedForestLists from "../SavedForestLists/SavedForestLists";
+import FeedBack from "../../components/FeedBack/FeedBack";
+
 const SearchOptions = [
   {
     key: 1,
@@ -57,6 +60,10 @@ const MainPage = () => {
   );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowFeedback, setIsShowFeedback] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+  console.log(selectedData);
 
   useEffect(() => {
     if (!myForestLists) {
@@ -94,17 +101,40 @@ const MainPage = () => {
         <SearchButton onClick={handleSearchClick}>🔍</SearchButton>
       </SearchForm>
       {myForestLists ? (
-        <SavedForestLists myForestLists={myForestLists} />
+        <SavedForestLists
+          setSelectedData={setSelectedData}
+          myForestLists={myForestLists}
+        />
       ) : (
         <div></div>
       )}
       <footer>
         <Link to="/forestList">
-          <ShowDataListButton>
-            ➕
-          </ShowDataListButton>
+          <ShowDataListButton>➕</ShowDataListButton>
         </Link>
       </footer>
+      {selectedData && (
+        <Modal
+          data={{
+            id: selectedData.id,
+            fcNm: selectedData.name,
+            fcAddr: selectedData.address,
+            ref1: selectedData.phoneNum,
+            memo: selectedData.memo,
+          }}
+          mode="change"
+          setModalOpen={setIsShowModal}
+          setFeedback={(e) => console.log(e)}
+          setFeedbackOpen={() => setIsShowFeedback(true)}
+        />
+      )}
+      {isShowFeedback && (
+        <FeedBack
+          feedback="change"
+          feedbackOpen={isShowFeedback}
+          setFeedbackOpen={setIsShowFeedback}
+        />
+      )}
     </Wrapper>
   );
 };
