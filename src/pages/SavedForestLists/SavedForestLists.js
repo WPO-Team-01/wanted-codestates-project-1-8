@@ -1,12 +1,14 @@
 import SavedForestCard from "./SavedForestCard";
 
-const ForestLists = ({ myForestLists }) => {
-  console.log(myForestLists);
-
+const ForestLists = ({ myForestLists, setSelectedData }) => {
   return (
     <>
       {myForestLists.map((card, index) => (
-        <SavedForestCard card={card} key={index} />
+        <SavedForestCard
+          setSelectedData={setSelectedData}
+          card={card}
+          key={index}
+        />
       ))}
     </>
   );
