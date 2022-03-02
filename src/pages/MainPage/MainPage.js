@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SavedForestLists from "../SavedForestLists/SavedForestLists";
 const SearchOptions = [
@@ -62,18 +63,22 @@ const MainPage = () => {
       localStorage.setItem("myForestLists", JSON.stringify([]));
       setMyForestLists(JSON.parse(localStorage.getItem("myForestLists")));
     }
-  }, []);
+  }, [myForestLists]);
 
   // 검색 시 보여줄 List 만드는 함수
   const handleSearchClick = () => {
-    console.log(
-      searchInputRef.current.value.trim(),
-      currentSelectRef.current.value
-    );
-  };
+    const targetForestLists = JSON.parse(localStorage.getItem("myForestLists"));
+    const selectType = currentSelectRef.current.value;
+    const searchInput = searchInputRef.current.value.trim();
 
-  //전체 조회 List 보여주기
-  const handleShowDataListClick = () => {};
+    const searchMyForestLists = targetForestLists.filter((elem) => {
+      if (elem[selectType].includes(searchInput)) {
+        return true;
+      }
+    });
+
+    setMyForestLists(searchMyForestLists);
+  };
 
   return (
     <Wrapper>
@@ -94,9 +99,11 @@ const MainPage = () => {
         <div></div>
       )}
       <footer>
-        <ShowDataListButton onClick={handleShowDataListClick}>
-          ➕
-        </ShowDataListButton>
+        <Link to="/forestList">
+          <ShowDataListButton onClick={handleShowDataListClick}>
+            ➕
+          </ShowDataListButton>
+        </Link>
       </footer>
     </Wrapper>
   );
