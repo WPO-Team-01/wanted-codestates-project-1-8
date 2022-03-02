@@ -85,7 +85,11 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
           <Text title="이름" data={data.fcNm} />
           <Text title="주소" data={data.fcAddr} />
           <Text title="연락처" data={data.ref1} />
-          <Memo title="메모" memo={memo} setMemo={setMemo} />
+          <Memo
+            title="메모"
+            memo={data.memo !== null ? data.memo : memo}
+            setMemo={setMemo}
+          />
           <Button
             mode={mode}
             handleModal={handleModal}

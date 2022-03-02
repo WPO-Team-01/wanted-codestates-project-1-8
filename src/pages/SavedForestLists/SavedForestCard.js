@@ -17,9 +17,17 @@ const CardInfo = styled.p`
   margin: 5px 0;
 `;
 
-const SavedForestCard = ({ card, setSelectedData }) => {
+const SavedForestCard = ({ setModalOpen, card, setSelectedData }) => {
+  function handleModal() {
+    setModalOpen(true);
+  }
   return (
-    <CardContainer onClick={() => setSelectedData(card)}>
+    <CardContainer
+      onClick={() => {
+        setSelectedData(card);
+        handleModal();
+      }}
+    >
       <CardTitle>⛰ {card.name}</CardTitle>
       <CardInfo>📪 {card.address}</CardInfo>
       <CardInfo>📞 {card.phoneNum}</CardInfo>
