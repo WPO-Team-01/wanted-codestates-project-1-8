@@ -19,6 +19,14 @@ const SearchOptions = [
   },
 ];
 
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  width: 375px;
+  height: 667px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid black;
+`;
 const SearchForm = styled.div`
   display: flex;
   flex-direction: row;
@@ -67,7 +75,7 @@ const MainPage = () => {
   const handleShowDataListClick = () => {};
 
   return (
-    <div>
+    <Wrapper>
       <SearchForm>
         <select ref={currentSelectRef}>
           {SearchOptions.map((elem) => (
@@ -89,7 +97,7 @@ const MainPage = () => {
           ➕
         </ShowDataListButton>
       </footer>
-    </div>
+    </Wrapper>
   );
 };
 
