@@ -100,7 +100,7 @@ const MainPage = () => {
       )}
       <footer>
         <Link to="/forestList">
-          <ShowDataListButton onClick={handleShowDataListClick}>
+          <ShowDataListButton>
             ➕
           </ShowDataListButton>
         </Link>
