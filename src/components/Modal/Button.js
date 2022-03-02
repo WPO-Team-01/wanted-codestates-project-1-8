@@ -53,7 +53,7 @@ const Button = ({
     }
   };
   const deleteData = () => {
-    if (memo !== "") {
+    if (memo.trim()) {
       handleModal();
       setFeedback("delete");
       setFeedbackOpen(true);
@@ -64,7 +64,7 @@ const Button = ({
     }
   };
   const changeData = () => {
-    if (memo !== "") {
+    if (memo.trim()) {
       handleModal();
       setFeedback("change");
       setFeedbackOpen(true);
