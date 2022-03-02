@@ -23,7 +23,7 @@ const SavedForestCard = ({ card }) => {
       <CardTitle>⛰ {card.name}</CardTitle>
       <CardInfo>📪 {card.address}</CardInfo>
       <CardInfo>📞 {card.phoneNum}</CardInfo>
-      <CardInfo>📒 {card.memo}</CardInfo>
+      {card.memo && <CardInfo>📒 {card.memo}</CardInfo>}
     </CardContainer>
   );
 };
