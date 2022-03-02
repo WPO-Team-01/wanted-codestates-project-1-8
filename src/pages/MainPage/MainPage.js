@@ -51,7 +51,7 @@ const MainPage = () => {
   useEffect(() => {
     if (!myForestLists) {
       localStorage.setItem("myForestLists", JSON.stringify([]));
-      setMyForestLists(localStorage.getItem("myForestLists"));
+      setMyForestLists(JSON.parse(localStorage.getItem("myForestLists")));
     }
   }, []);
 

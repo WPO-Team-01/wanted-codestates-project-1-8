@@ -8,6 +8,7 @@ const Background = styled.section`
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 `;
 
 const Container = styled.div`
@@ -31,6 +32,7 @@ const Container = styled.div`
       ? `translate(${window.innerWidth - 300}px, ${window.innerHeight / 2}px)`
       : `translate(${window.innerWidth}px, ${window.innerHeight / 2}px)`};
   transition: 0.3s;
+  z-index: 3;
 `;
 
 const Feedback = ({ feedback, feedbackOpen, setFeedbackOpen }) => {
