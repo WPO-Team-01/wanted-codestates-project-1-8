@@ -146,7 +146,7 @@ const MainPage = () => {
           setFeedback={setFeedback}
           setFeedbackOpen={setFeedbackOpen}
         />
-      ) : null}
+      )}
       {feedbackOpen ? (
         <FeedBack
           feedback={feedback}

@@ -5,26 +5,41 @@ import Feedback from "../../components/FeedBack/FeedBack";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SavedForestCard from "../SavedForestLists/SavedForestCard";
 import Loader from "../../components/Loader/Loader";
 
 const TitleBox = styled.div`
   font-size: 1.5rem;
   padding: 0.5rem;
+  margin: 1rem;
 `;
 
 const ListWrap = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-const ListBtn = styled.button`
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
+const CardContainer = styled.button`
+  background-color: #f2f2f2;
+  margin: 0 1rem;
+  padding: 1rem;
+  border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5) inset;
+  }
+`;
+
+const CardTitle = styled.div`
+  font-weight: bold;
+  margin: 5px 0;
+`;
+
+const CardInfo = styled.p`
+  margin: 5px 0;
 `;
 
 const Btn = styled.button`
@@ -32,8 +47,8 @@ const Btn = styled.button`
   padding: 0;
   border: none;
   position: fixed;
-  left: 0.5rem;
-  top: 0.5rem;
+  left: 1rem;
+  top: 1rem;
   background-color: #ddd;
   border-radius: 5px;
   width: 35px;
@@ -85,18 +100,14 @@ const ForestListPage = () => {
       <TitleBox>휴양림 목록</TitleBox>
       <ListWrap>
         {scrollList.map((forest, index) => (
-          <li key={`${forest.fcNm}-${index}`}>
-            <ListBtn onClick={() => onClickList(forest)}>
-              <SavedForestCard
-                card={{
-                  fcNm: forest.fcNm,
-                  name: forest.fcNm,
-                  address: forest.fcAddr,
-                  phoneNum: forest.ref1,
-                }}
-              ></SavedForestCard>
-            </ListBtn>
-          </li>
+          <CardContainer
+            key={`${forest.fcNm}-${index}`}
+            onClick={() => onClickList(forest)}
+          >
+            <CardTitle>⛰ {forest.fcNm}</CardTitle>
+            <CardInfo>📪 {forest.fcAddr}</CardInfo>
+            <CardInfo>📞 {forest.ref1}</CardInfo>
+          </CardContainer>
         ))}
         <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
         {isShowModal && (
