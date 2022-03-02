@@ -35,6 +35,7 @@ const Modal = ({
   setModalOpen,
   setFeedback,
   setFeedbackOpen,
+  setMyForestLists,
 }) => {
   // 상위 요소에서 modalOpen, setModalOpen, setFeedBack을 props로 내려 받아야 합니다.
 
@@ -76,6 +77,7 @@ const Modal = ({
     temp.splice(deleteIndex, 1);
     console.log(temp);
     localStorage.setItem("myForestLists", JSON.stringify(temp));
+    setMyForestLists(temp);
   };
   console.log(memo);
   const changeMemo = () => {
@@ -99,6 +101,7 @@ const Modal = ({
     temp[changeIndex] = object;
     console.log(temp);
     localStorage.setItem("myForestLists", JSON.stringify(temp));
+    setMyForestLists(temp);
   };
 
   return (
