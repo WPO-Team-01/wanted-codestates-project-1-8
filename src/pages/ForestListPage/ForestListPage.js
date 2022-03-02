@@ -5,7 +5,6 @@ import Feedback from "../../components/FeedBack/FeedBack";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SavedForestCard from "../SavedForestLists/SavedForestCard";
 import Loader from "../../components/Loader/Loader";
 
 const TitleBox = styled.div`
@@ -19,12 +18,20 @@ const ListWrap = styled.ul`
   padding: 0;
 `;
 
-const ListBtn = styled.button`
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
+const CardContainer = styled.div`
+  background-color: #f2f2f2;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 5px;
+`;
+
+const CardTitle = styled.div`
+  font-weight: bold;
+  margin: 5px 0;
+`;
+
+const CardInfo = styled.p`
+  margin: 5px 0;
 `;
 
 const Btn = styled.button`
@@ -85,16 +92,11 @@ const ForestListPage = () => {
       <ListWrap>
         {scrollList.map((forest, index) => (
           <li key={`${forest.fcNm}-${index}`}>
-            <ListBtn onClick={() => onClickList(forest)}>
-              <SavedForestCard
-                card={{
-                  fcNm: forest.fcNm,
-                  name: forest.fcNm,
-                  address: forest.fcAddr,
-                  phoneNum: forest.ref1,
-                }}
-              ></SavedForestCard>
-            </ListBtn>
+            <CardContainer onClick={() => onClickList(forest)}>
+              <CardTitle>⛰ {forest.fcNm}</CardTitle>
+              <CardInfo>📪 {forest.fcAddr}</CardInfo>
+              <CardInfo>📞 {forest.ref1}</CardInfo>
+            </CardContainer>
           </li>
         ))}
         <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
