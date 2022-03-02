@@ -42,14 +42,14 @@ const SearchButton = styled.div`
 `;
 
 const MainPage = () => {
-  const [myForestLists, setMyForestLists] = useState(localStorage.getItem("myForestLists"));
+  const [myForestLists, setMyForestLists] = useState(JSON.parse(localStorage.getItem("myForestLists")));
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
 
   useEffect(() => {
     if (!myForestLists) {
       localStorage.setItem("myForestLists", JSON.stringify([]));
-      setMyForestLists(localStorage.getItem("myForestLists"));
+      setMyForestLists(JSON.parse(localStorage.getItem("myForestLists")));
     }
   }, []);
 
@@ -59,11 +59,34 @@ const MainPage = () => {
       searchInputRef.current.value.trim(),
       currentSelectRef.current.value
     );
+
+    const searchMyForestLists = myForestLists.filter((elem)=>{
+      console.log(elem.address);
+      return true;
+
+    });
   };
 
   //전체 조회 List 보여주기
   const handleShowDataListClick = () => {
     
+  };
+
+  
+  const makeList = () => {
+    let temp = localStorage.getItem("myForestLists");
+    temp = JSON.parse(temp);
+
+    let object = {
+      id: "1",
+      name: "테스트 이름",
+      address: "테스트 주소",
+      phoneNum: "000-000-0000",
+      memo: "테스트 메모",
+    };
+
+    temp.push(object);
+    localStorage.setItem("myForestLists", JSON.stringify(temp));
   };
 
 
@@ -83,6 +106,7 @@ const MainPage = () => {
       <div>휴양지 목록</div>
       <footer>
         <ShowDataListButton onClick={handleShowDataListClick}>➕</ShowDataListButton>
+        <ShowDataListButton onClick={makeList}>MAKE LIST</ShowDataListButton>
       </footer>
     </div>
   );
