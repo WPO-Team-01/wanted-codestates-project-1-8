@@ -3,24 +3,24 @@ import { useEffect, useState } from "react";
 const useInfiniteScroll = (callback) => {
   const [target, setTarget] = useState(null);
 
-  const onIntersect = ([entry], observer) => {
-    if (entry.isIntersecting) {
-      observer.unobserve(entry.target);
-      callback();
-      observer.observe(entry.target);
-    }
-  };
-
   useEffect(() => {
     let observer;
+    const onIntersect = ([entry], observer) => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        callback();
+        observer.observe(entry.target);
+      }
+    };
+
     if (target) {
       observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.5,
+        threshold: 1,
       });
       observer.observe(target);
     }
     return () => observer && observer.disconnect();
-  }, [target]);
+  }, [target, callback]);
 
   return setTarget;
 };
