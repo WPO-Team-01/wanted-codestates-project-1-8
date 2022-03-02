@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   margin: 20px auto;
   padding: 20px;
   border: 1px solid black;
+  overflow-y: scroll;
 `;
 const SearchForm = styled.div`
   display: flex;
