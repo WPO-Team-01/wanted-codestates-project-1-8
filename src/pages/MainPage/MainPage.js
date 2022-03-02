@@ -89,9 +89,7 @@ const MainPage = () => {
     const searchInput = searchInputRef.current.value.trim();
 
     const searchMyForestLists = targetForestLists.filter((elem) => {
-      if (elem[selectType].includes(searchInput)) {
-        return true;
-      }
+        return elem[selectType].includes(searchInput);
     });
 
     setMyForestLists(searchMyForestLists);
