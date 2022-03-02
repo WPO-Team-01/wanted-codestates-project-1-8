@@ -32,6 +32,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   overflow-y: scroll;
 `;
+
 const SearchForm = styled.div`
   display: flex;
   flex-direction: row;
@@ -41,10 +42,15 @@ const ShowDataListButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
-  border-radius: 100%;
+
+  position: sticky;
+  float: right;
+
+  bottom: 0;
   width: 35px;
   height: 35px;
+  border-radius: 100%;
+  background-color: gray;
 
   cursor: pointer;
 `;
@@ -52,11 +58,12 @@ const ShowDataListButton = styled.div`
 const SearchButton = styled.div`
   cursor: pointer;
   border: solid 1px black;
+  padding-left: 2px;
 `;
 
 const MainPage = () => {
   const [myForestLists, setMyForestLists] = useState(
-    JSON.parse(localStorage.getItem("myForestLists")),
+    JSON.parse(localStorage.getItem("myForestLists"))
   );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
@@ -97,7 +104,11 @@ const MainPage = () => {
             </option>
           ))}
         </select>
-        <input ref={searchInputRef} placeholder="검색어를 입력해주세요." />
+        <input
+          ref={searchInputRef}
+          placeholder="검색어를 입력해주세요."
+          style={{ width: "100%" }}
+        />
         <SearchButton onClick={handleSearchClick}>🔍</SearchButton>
       </SearchForm>
       {myForestLists ? (
@@ -108,11 +119,11 @@ const MainPage = () => {
       ) : (
         <div></div>
       )}
-      <footer>
-        <Link to="/forestList">
-          <ShowDataListButton>➕</ShowDataListButton>
-        </Link>
-      </footer>
+      <Link to="/forestList" style={{ textDecoration: "none" }}>
+        <ShowDataListButton>
+          <div style={{ marginTop: "-1px", marginLeft: "0.5px" }}>➕</div>
+        </ShowDataListButton>
+      </Link>
       {selectedData && (
         <Modal
           data={{
