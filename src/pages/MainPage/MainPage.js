@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchOptions = [
@@ -42,7 +43,9 @@ const SearchButton = styled.div`
 `;
 
 const MainPage = () => {
-  const [myForestLists, setMyForestLists] = useState(JSON.parse(localStorage.getItem("myForestLists")));
+  const [myForestLists, setMyForestLists] = useState(
+    JSON.parse(localStorage.getItem("myForestLists"))
+  );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
 
@@ -51,44 +54,39 @@ const MainPage = () => {
       localStorage.setItem("myForestLists", JSON.stringify([]));
       setMyForestLists(JSON.parse(localStorage.getItem("myForestLists")));
     }
-  }, []);
+  }, [myForestLists]);
 
   // 검색 시 보여줄 List 만드는 함수
   const handleSearchClick = () => {
-    console.log(
-      searchInputRef.current.value.trim(),
-      currentSelectRef.current.value
-    );
+    const targetForestLists = JSON.parse(localStorage.getItem("myForestLists"));
+    const selectType = currentSelectRef.current.value;
+    const searchInput = searchInputRef.current.value.trim();
 
-    const searchMyForestLists = myForestLists.filter((elem)=>{
-      console.log(elem.address);
-      return true;
-
+    const searchMyForestLists = targetForestLists.filter((elem) => {
+      if (elem[selectType].includes(searchInput)) {
+        return true;
+      }
     });
+
+    setMyForestLists(searchMyForestLists);
   };
 
-  //전체 조회 List 보여주기
-  const handleShowDataListClick = () => {
-    
-  };
+  // const makeList = () => {
+  //   let temp = localStorage.getItem("myForestLists");
+  //   temp = JSON.parse(temp);
 
-  
-  const makeList = () => {
-    let temp = localStorage.getItem("myForestLists");
-    temp = JSON.parse(temp);
+  //   let object = {
+  //     id: "1",
+  //     name: "테스트 이름^^",
+  //     address: "테스트 주소%%",
+  //     phoneNum: "000-000-0000$$",
+  //     memo: "테스트 메모@@",
+  //   };
 
-    let object = {
-      id: "1",
-      name: "테스트 이름",
-      address: "테스트 주소",
-      phoneNum: "000-000-0000",
-      memo: "테스트 메모",
-    };
-
-    temp.push(object);
-    localStorage.setItem("myForestLists", JSON.stringify(temp));
-  };
-
+  //   temp.push(object);
+  //   localStorage.setItem("myForestLists", JSON.stringify(temp));
+  //   setMyForestLists(temp);
+  // };
 
   return (
     <div>
@@ -105,7 +103,12 @@ const MainPage = () => {
       </SearchForm>
       <div>휴양지 목록</div>
       <footer>
-        <ShowDataListButton onClick={handleShowDataListClick}>➕</ShowDataListButton>
+        <Link to="/">
+          <ShowDataListButton onClick={handleShowDataListClick}>
+            ➕
+          </ShowDataListButton>
+        </Link>
+
         <ShowDataListButton onClick={makeList}>MAKE LIST</ShowDataListButton>
       </footer>
     </div>
