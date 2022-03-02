@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-
+import SavedForestLists from "../SavedForestLists/SavedForestLists";
 const SearchOptions = [
   {
     key: 1,
@@ -42,24 +42,29 @@ const SearchButton = styled.div`
 `;
 
 const MainPage = () => {
+  const [myForestLists, setMyForestLists] = useState(
+    JSON.parse(localStorage.getItem("myForestLists"))
+  );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
 
   useEffect(() => {
-    const getDataList = localStorage.getItem('myData');
-
-
+    if (!myForestLists) {
+      localStorage.setItem("myForestLists", JSON.stringify([]));
+      setMyForestLists(localStorage.getItem("myForestLists"));
+    }
   }, []);
 
-
+  // 검색 시 보여줄 List 만드는 함수
   const handleSearchClick = () => {
-      console.log(searchInputRef.current.value.trim(), currentSelectRef.current.value);
-
+    console.log(
+      searchInputRef.current.value.trim(),
+      currentSelectRef.current.value
+    );
   };
 
-  const handleShowDataListClick = () => {
-    // 전체 조회 Link
-  };
+  //전체 조회 List 보여주기
+  const handleShowDataListClick = () => {};
 
   return (
     <div>
@@ -74,9 +79,15 @@ const MainPage = () => {
         <input ref={searchInputRef} placeholder="검색어를 입력해주세요." />
         <SearchButton onClick={handleSearchClick}>🔍</SearchButton>
       </SearchForm>
-      <div>휴양지 목록</div>
+      {myForestLists ? (
+        <SavedForestLists myForestLists={myForestLists} />
+      ) : (
+        <div></div>
+      )}
       <footer>
-        <ShowDataListButton onClick={handleShowDataListClick}>➕</ShowDataListButton>
+        <ShowDataListButton onClick={handleShowDataListClick}>
+          ➕
+        </ShowDataListButton>
       </footer>
     </div>
   );

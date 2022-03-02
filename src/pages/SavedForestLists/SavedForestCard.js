@@ -20,9 +20,10 @@ const SavedForestCard = ({ card }) => {
   console.log(card, card.fcNm);
   return (
     <CardContainer>
-      <CardTitle>⛰ {card.fcNm}</CardTitle>
-      <CardInfo>📪 {card.fcAddr}</CardInfo>
-      <CardInfo>📞 {card.ref1}</CardInfo>
+      <CardTitle>⛰ {card.name}</CardTitle>
+      <CardInfo>📪 {card.address}</CardInfo>
+      <CardInfo>📞 {card.phoneNum}</CardInfo>
+      <CardInfo>📒 {card.memo}</CardInfo>
     </CardContainer>
   );
 };

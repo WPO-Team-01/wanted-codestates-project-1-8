@@ -1,11 +1,11 @@
 import SavedForestCard from "./SavedForestCard";
 
-const ForestLists = ({ list }) => {
-  console.log(list);
+const ForestLists = ({ myForestLists }) => {
+  console.log(myForestLists);
 
   return (
     <>
-      {list.map((card, index) => (
+      {myForestLists.map((card, index) => (
         <SavedForestCard card={card} key={index} />
       ))}
     </>

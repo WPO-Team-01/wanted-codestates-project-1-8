@@ -1,8 +1,9 @@
-import { useState } from "react";
 import "./App.css";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import { MainPage, ForestListPage } from "./pages";
+
 import { useGetContentsQuery } from "./store/query/ForestApi";
 import styled from "styled-components";
-import MainPage from "./pages/MainPage/MainPage";
 
 const Layout = styled.div`
   max-width: 400px;
@@ -10,18 +11,18 @@ const Layout = styled.div`
 `;
 
 function App() {
-  const [pageNum, setPageNum] = useState(1);
-  const { data, isLoading } = useGetContentsQuery(pageNum);
-
-  if (!isLoading) {
-    console.log(data);
-  }
-  localStorage.setItem("data", JSON.stringify([]));
-
   return (
-    <Layout>
-      <MainPage />
-    </Layout>
+    <HashRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<MainPage></MainPage>}></Route>
+          <Route
+            path="/forestList"
+            element={<ForestListPage></ForestListPage>}
+          ></Route>
+        </Routes>
+      </div>
+    </HashRouter>
   );
 }
 
