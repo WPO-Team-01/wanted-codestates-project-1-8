@@ -38,7 +38,7 @@ const Modal = ({ data, mode, setModalOpen, setFeedback, setFeedbackOpen }) => {
   };
 
   const makeMemo = () => {
-    let temp = localStorage.getItem("myForestLists") || [];
+    let temp = localStorage.getItem("myForestLists");
     temp = JSON.parse(temp);
     console.log(temp);
 

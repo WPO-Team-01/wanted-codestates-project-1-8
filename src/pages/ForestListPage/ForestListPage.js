@@ -1,6 +1,7 @@
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal/Modal";
+import Feedback from "../../components/FeedBack/FeedBack";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
 
@@ -23,6 +24,7 @@ const ForestListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowFeedback, setIsShowFeedback] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const queryResult = useGetContentsQuery(scrollPage);
 
@@ -55,7 +57,7 @@ const ForestListPage = () => {
           mode="store"
           setModalOpen={setIsShowModal}
           setFeedback={(e) => console.log(e)}
-          setFeedbackOpen={(e) => console.log(e)}
+          setFeedbackOpen={() => setIsShowFeedback(true)}
         ></Modal>
       )}
       <ListWrap>
@@ -74,6 +76,12 @@ const ForestListPage = () => {
         ))}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
         {isLoading && !isEnded && <div>로딩중</div>}
+
+        <Feedback
+          feedback="store"
+          feedbackOpen={isShowFeedback}
+          setFeedbackOpen={setIsShowFeedback}
+        ></Feedback>
       </ListWrap>
     </>
   );
