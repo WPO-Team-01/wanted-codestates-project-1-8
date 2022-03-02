@@ -142,6 +142,7 @@ const MainPage = () => {
           setModalOpen={setModalOpen}
           setFeedback={setFeedback}
           setFeedbackOpen={setFeedbackOpen}
+          setMyForestLists={setMyForestLists}
         />
       )}
       {feedbackOpen ? (
