@@ -4,6 +4,7 @@ import Modal from "../../components/Modal/Modal";
 import Feedback from "../../components/FeedBack/FeedBack";
 import { useGetContentsQuery } from "../../store/query/ForestApi";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const TitleBox = styled.div`
   font-size: 1.5rem;
@@ -16,9 +17,37 @@ const ListWrap = styled.ul`
   padding: 0;
 `;
 
+const ListBtn = styled.button`
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
+const Btn = styled.button`
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: fixed;
+  left: 0.5rem;
+  top: 0.5rem;
+  background-color: #ddd;
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5) inset;
+  }
+`;
+
 const numOfRows = 10;
 
 const ForestListPage = () => {
+  const navigate = useNavigate();
   const [scrollPage, setScrollPage] = useState(0);
   const [scrollList, setScrollList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,12 +95,12 @@ const ForestListPage = () => {
             key={`${forest.fcNm}-${index}`}
             style={{ height: "200px", border: "1px solid black" }}
           >
-            <button onClick={() => onClickList(forest)}>
+            <ListBtn onClick={() => onClickList(forest)}>
               <span>{index + 1}</span>
               <span>{forest.fcNm}</span>
               <span>{forest.fcAddr}</span>
               <span>{forest.ref1}</span>
-            </button>
+            </ListBtn>
           </li>
         ))}
         {!isLoading && !isEnded && <div ref={setObservationTarget}>더보기</div>}
@@ -83,6 +112,7 @@ const ForestListPage = () => {
           setFeedbackOpen={setIsShowFeedback}
         ></Feedback>
       </ListWrap>
+      <Btn onClick={() => navigate(-1)}>&#8678;</Btn>
     </>
   );
 };
