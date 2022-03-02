@@ -67,9 +67,13 @@ const MainPage = () => {
   );
   const searchInputRef = useRef("");
   const currentSelectRef = useRef("");
-  const [isShowModal, setIsShowModal] = useState(false);
-  const [isShowFeedback, setIsShowFeedback] = useState(false);
+  //
+  const [modalOpen, setModalOpen] = useState(false);
+  const [feedback, setFeedback] = useState("store");
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  //
   const [selectedData, setSelectedData] = useState(null);
+
   console.log(selectedData);
 
   useEffect(() => {
@@ -94,6 +98,8 @@ const MainPage = () => {
     setMyForestLists(searchMyForestLists);
   };
 
+  console.log(selectedData);
+  console.log(modalOpen);
   return (
     <Wrapper>
       <SearchForm>
@@ -113,12 +119,14 @@ const MainPage = () => {
       </SearchForm>
       {myForestLists ? (
         <SavedForestLists
+          setModalOpen={setModalOpen}
           setSelectedData={setSelectedData}
           myForestLists={myForestLists}
         />
       ) : (
         <div></div>
       )}
+
       <Link to="/forestList" style={{ textDecoration: "none" }}>
         <ShowDataListButton>
           <div style={{ marginTop: "-1px", marginLeft: "0.5px" }}>➕</div>
@@ -134,18 +142,18 @@ const MainPage = () => {
             memo: selectedData.memo,
           }}
           mode="change"
-          setModalOpen={setIsShowModal}
-          setFeedback={(e) => console.log(e)}
-          setFeedbackOpen={() => setIsShowFeedback(true)}
+          setModalOpen={setModalOpen}
+          setFeedback={setFeedback}
+          setFeedbackOpen={setFeedbackOpen}
         />
-      )}
-      {isShowFeedback && (
+      ) : null}
+      {feedbackOpen ? (
         <FeedBack
-          feedback="change"
-          feedbackOpen={isShowFeedback}
-          setFeedbackOpen={setIsShowFeedback}
+          feedback={feedback}
+          feedbackOpen={feedbackOpen}
+          setFeedbackOpen={setFeedbackOpen}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };
