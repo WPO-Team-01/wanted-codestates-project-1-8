@@ -42,7 +42,7 @@ const Button = ({
   changeMemo,
 }) => {
   const storeData = () => {
-    if (memo !== "") {
+    if (memo.trim()) {
       handleModal();
       setFeedback("store");
       setFeedbackOpen(true);
