@@ -144,7 +144,7 @@ const MainPage = () => {
           setFeedbackOpen={setFeedbackOpen}
           setMyForestLists={setMyForestLists}
         />
-      )}
+      ) : null}
       {feedbackOpen ? (
         <FeedBack
           feedback={feedback}

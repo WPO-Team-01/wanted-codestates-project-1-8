@@ -83,7 +83,6 @@ const ForestListPage = () => {
 
   const getMoreItem = async () => {
     if (!queryResult.isFetching && !isEnded) {
-      console.warn(1111, queryResult.isFetching);
       setScrollPage((prev) => prev + 1);
     }
   };
